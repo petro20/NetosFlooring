@@ -2909,15 +2909,15 @@ header {
     align-content: center;
     gap: 64px;
     padding: 80px max(20px, calc((100vw - var(--max-width)) / 2));
-    background:
+    background-color: var(--ivory);
+    background-image:
         linear-gradient(90deg, rgba(255, 248, 238, 0.94), rgba(255, 248, 238, 0.72)),
         linear-gradient(90deg, rgba(184, 102, 45, 0.035) 1px, transparent 1px),
         linear-gradient(180deg, rgba(24, 22, 20, 0.025) 1px, transparent 1px),
-        var(--photo-cozy-interior),
-        var(--ivory);
-    background-repeat: no-repeat, repeat, repeat, no-repeat, no-repeat;
-    background-size: auto, 44px 44px, 44px 44px, cover, auto;
-    background-position: center, center, center, right center, center;
+        var(--photo-cozy-interior);
+    background-repeat: no-repeat, repeat, repeat, no-repeat;
+    background-size: 100% 100%, 44px 44px, 44px 44px, cover;
+    background-position: center, center, center, right center;
 }
 
 .thank-you-content {
