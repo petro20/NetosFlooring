@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="images/netos-flooring-logo.jpeg">
 
-    <link rel="stylesheet" href="css/style.css?v=20260430-whatsapp">
+    <link rel="stylesheet" href="css/style.css?v=20260430-contact-form">
 </head>
 <body>
     <div id="header"></div>
@@ -39,30 +39,63 @@
                     <p>Let's find out if we're the right fit.</p>
                 </div>
 
-                <form id="contactForm" class="form-container">
+                <form id="contactForm" class="form-container" novalidate>
                     <div class="form-heading">
                         <h2>Request Your Free In-Home Estimate</h2>
                         <p>No obligation. No pressure. Just an honest conversation about your home.</p>
                     </div>
 
-                    <div class="form-group">
-                        <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" name="fullName" required>
-                        <span class="form-error">Please enter your full name</span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
-                        <span class="form-error">Please enter your phone number</span>
+                    <div class="form-alert" data-form-alert role="status" aria-live="polite"></div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" autocomplete="name" required>
+                            <span class="form-error">Please enter your full name</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="(973) 703-2816" required>
+                            <span class="form-error">Please enter a valid phone number</span>
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
                         <span class="form-error">Please enter a valid email address</span>
                     </div>
-                    
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferredContact">Preferred Contact Method</label>
+                            <select id="preferredContact" name="preferredContact">
+                                <option value="">Any method is fine</option>
+                                <option value="phone">Phone Call</option>
+                                <option value="text">Text Message</option>
+                                <option value="email">Email</option>
+                                <option value="whatsapp">WhatsApp</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bestTime">Best Time to Reach You</label>
+                            <select id="bestTime" name="bestTime">
+                                <option value="">Any time</option>
+                                <option value="morning">Morning</option>
+                                <option value="afternoon">Afternoon</option>
+                                <option value="evening">Evening</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Project Location *</label>
+                        <input type="text" id="location" name="location" autocomplete="street-address" placeholder="City / ZIP code / state" required>
+                        <span class="form-error">Please enter the project location</span>
+                    </div>
+
                     <div class="form-group">
                         <label for="service">Service You're Interested In *</label>
                         <select id="service" name="service" required>
@@ -85,36 +118,32 @@
                         <span class="form-error">Please describe your project</span>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="timeline">When are you looking to start your project?</label>
-                        <select id="timeline" name="timeline">
-                            <option value="">Select timeline</option>
-                            <option value="ready-now">Ready to Start Now</option>
-                            <option value="30-days">Within the Next 30 Days</option>
-                            <option value="more-than-month">More than a Month from Now</option>
-                            <option value="planning">Just Planning</option>
-                            <option value="exploring">Exploring</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="location">Project Location *</label>
-                        <input type="text" id="location" name="location" placeholder="City / ZIP code / state" required>
-                        <span class="form-error">Please enter the project location</span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="referral">How Did You Hear About Us?</label>
-                        <select id="referral" name="referral">
-                            <option value="">Select an option</option>
-                            <option value="thumbtack">Thumbtack</option>
-                            <option value="referral">Referral</option>
-                            <option value="google">Google</option>
-                            <option value="instagram">Instagram</option>
-                            <option value="tiktok">TikTok</option>
-                            <option value="yelp">Yelp</option>
-                            <option value="other">Other</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="timeline">When are you looking to start your project?</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select timeline</option>
+                                <option value="ready-now">Ready to Start Now</option>
+                                <option value="30-days">Within the Next 30 Days</option>
+                                <option value="more-than-month">More than a Month from Now</option>
+                                <option value="planning">Just Planning</option>
+                                <option value="exploring">Exploring</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referral">How Did You Hear About Us?</label>
+                            <select id="referral" name="referral">
+                                <option value="">Select an option</option>
+                                <option value="thumbtack">Thumbtack</option>
+                                <option value="referral">Referral</option>
+                                <option value="google">Google</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="yelp">Yelp</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">

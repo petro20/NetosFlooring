@@ -48,59 +48,125 @@ function initFormValidation() {
             return;
         }
 
+        const formAlert = contactForm.querySelector('[data-form-alert]');
+
+        function setFormMessage(message, type = 'success') {
+            if (!formAlert) {
+                return;
+            }
+
+            formAlert.textContent = message;
+            formAlert.classList.add('active');
+            formAlert.classList.toggle('error', type === 'error');
+        }
+
+        function clearFormMessage() {
+            if (!formAlert) {
+                return;
+            }
+
+            formAlert.textContent = '';
+            formAlert.classList.remove('active', 'error');
+        }
+
+        function getFieldGroup(field) {
+            return field.closest('.form-group');
+        }
+
+        function setFieldError(field, hasError) {
+            const group = getFieldGroup(field);
+
+            if (group) {
+                group.classList.toggle('error', hasError);
+            }
+
+            field.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+        }
+
+        function isValidEmail(value) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        function isValidPhone(value) {
+            const digits = value.replace(/\D/g, '');
+
+            return /^[\d\s\-\(\)\+\.]+$/.test(value) && digits.length >= 10;
+        }
+
+        function validateField(field) {
+            const value = field.value.trim();
+
+            if (field.required && !value) {
+                setFieldError(field, true);
+                return false;
+            }
+
+            if (field.type === 'email' && value && !isValidEmail(value)) {
+                setFieldError(field, true);
+                return false;
+            }
+
+            if (field.type === 'tel' && value && !isValidPhone(value)) {
+                setFieldError(field, true);
+                return false;
+            }
+
+            setFieldError(field, false);
+            return true;
+        }
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             let isValid = true;
+            let firstInvalidField = null;
             const requiredFields = contactForm.querySelectorAll('[required]');
-            
+            const fieldsToValidate = contactForm.querySelectorAll('input, select, textarea');
+
+            clearFormMessage();
+
             // Clear previous errors
             contactForm.querySelectorAll('.form-group').forEach(group => {
                 group.classList.remove('error');
             });
-            
-            // Validate each required field
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
+
+            requiredFields.forEach(field => field.setAttribute('aria-required', 'true'));
+
+            fieldsToValidate.forEach(field => {
+                if (!validateField(field)) {
                     isValid = false;
-                    field.closest('.form-group').classList.add('error');
-                }
-                
-                // Email validation
-                if (field.type === 'email' && field.value) {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(field.value)) {
-                        isValid = false;
-                        field.closest('.form-group').classList.add('error');
-                    }
-                }
-                
-                // Phone validation
-                if (field.type === 'tel' && field.value) {
-                    const phoneRegex = /^[\d\s\-\(\)\+]+$/;
-                    if (!phoneRegex.test(field.value) || field.value.replace(/\D/g, '').length < 10) {
-                        isValid = false;
-                        field.closest('.form-group').classList.add('error');
+
+                    if (!firstInvalidField) {
+                        firstInvalidField = field;
                     }
                 }
             });
-            
+
             if (isValid) {
-                // Show success message (in production, this would send to a server)
-                alert('Thank you for your request! We will contact you within 24 hours.');
+                setFormMessage('Thank you for your request. We will contact you within 24 hours.');
                 contactForm.reset();
+                contactForm.querySelectorAll('[aria-invalid]').forEach(field => {
+                    field.setAttribute('aria-invalid', 'false');
+                });
+            } else {
+                setFormMessage('Please review the highlighted fields before sending your request.', 'error');
+
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
             }
         });
-        
+
         // Remove error class on input
-        const formGroups = contactForm.querySelectorAll('.form-group');
-        formGroups.forEach(group => {
-            const input = group.querySelector('input, select, textarea');
-            if (input) {
-                input.addEventListener('input', function() {
-                    group.classList.remove('error');
-                });
-            }
+        contactForm.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', function() {
+                clearFormMessage();
+                validateField(field);
+            });
+
+            field.addEventListener('blur', function() {
+                validateField(field);
+            });
         });
     }
 }
