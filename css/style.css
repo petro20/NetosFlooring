@@ -3171,6 +3171,105 @@ header {
     text-align: left;
 }
 
+.why-choose-section {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(115deg, rgba(24, 22, 20, 0.96) 0 38%, rgba(86, 48, 28, 0.8) 100%),
+        var(--photo-renovated-room) center / cover,
+        var(--black);
+    color: var(--white);
+}
+
+.why-choose-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(246, 208, 166, 0.1) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(246, 208, 166, 0.08) 1px, transparent 1px);
+    background-size: 58px 58px;
+    pointer-events: none;
+}
+
+.why-choose-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.why-choose-section .section-title {
+    color: var(--white);
+    text-align: left;
+    max-width: 720px;
+    margin-left: 0;
+}
+
+.why-choose-section .section-subtitle {
+    color: rgba(255, 255, 255, 0.76);
+    text-align: left;
+    margin-left: 0;
+    max-width: 620px;
+}
+
+.why-choose-section .features-grid {
+    gap: 18px;
+    margin-top: 44px;
+}
+
+.why-choose-section .feature-card {
+    position: relative;
+    min-height: 250px;
+    padding: 30px;
+    border: 1px solid rgba(246, 208, 166, 0.2);
+    border-radius: 8px;
+    background:
+        linear-gradient(180deg, rgba(255, 248, 238, 0.14), rgba(255, 248, 238, 0.06));
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.why-choose-section .feature-card::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    top: 0;
+    height: 4px;
+    border-radius: 0 0 999px 999px;
+    background: linear-gradient(90deg, var(--primary-orange), var(--champagne));
+}
+
+.why-choose-section .feature-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(246, 208, 166, 0.48);
+    background-color: rgba(255, 248, 238, 0.06);
+}
+
+.why-choose-section .feature-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 46px;
+    border: 1px solid rgba(246, 208, 166, 0.32);
+    border-radius: 50%;
+    background-color: rgba(242, 138, 46, 0.18);
+    color: var(--champagne);
+    font-size: 0.86rem;
+    font-weight: 900;
+}
+
+.why-choose-section .feature-card h3 {
+    color: var(--white);
+    font-size: 1.22rem;
+    margin-bottom: 14px;
+}
+
+.why-choose-section .feature-card p {
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
 .benefits-list {
     display: grid;
     gap: 16px;
