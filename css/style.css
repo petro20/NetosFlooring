@@ -876,15 +876,15 @@ footer {
     position: fixed;
     bottom: 22px;
     right: 22px;
+    width: 60px;
     min-width: 60px;
     height: 60px;
-    padding: 0 18px;
-    gap: 10px;
+    padding: 0;
     border: 1px solid rgba(255, 255, 255, 0.24);
     background:
         linear-gradient(135deg, #25d366, #128c7e);
     color: var(--white);
-    border-radius: 999px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -903,7 +903,12 @@ footer {
 }
 
 .whatsapp-float span {
-    color: currentColor;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 .whatsapp-float:hover {
@@ -2908,9 +2913,11 @@ header {
         linear-gradient(90deg, rgba(255, 248, 238, 0.94), rgba(255, 248, 238, 0.72)),
         linear-gradient(90deg, rgba(184, 102, 45, 0.035) 1px, transparent 1px),
         linear-gradient(180deg, rgba(24, 22, 20, 0.025) 1px, transparent 1px),
-        var(--photo-cozy-interior) right center / cover,
+        var(--photo-cozy-interior),
         var(--ivory);
-    background-size: 44px 44px;
+    background-repeat: no-repeat, repeat, repeat, no-repeat, no-repeat;
+    background-size: auto, 44px 44px, 44px 44px, cover, auto;
+    background-position: center, center, center, right center, center;
 }
 
 .thank-you-content {
