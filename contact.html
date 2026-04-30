@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - C & A Home Improvement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Let's Talk About Your Home</h1>
+            <p>You've done the research. You know what you want. Now let's make it happen.</p>
+        </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section class="section contact-section">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-intro">
+                    <span class="eyebrow-dark">Contact</span>
+                    <h2>The right team makes all the difference.</h2>
+                    <p>Whether you're ready to start or just exploring your options, we're happy to take a look and give you an honest assessment, walk through your choices, and put together a clear quote.</p>
+                    <p>Let's find out if we're the right fit.</p>
+                </div>
+
+                <form id="contactForm" class="form-container">
+                    <div class="form-heading">
+                        <h2>Request Your Free In-Home Estimate</h2>
+                        <p>No obligation. No pressure. Just an honest conversation about your home.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                        <span class="form-error">Please enter your full name</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <span class="form-error">Please enter your phone number</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="form-error">Please enter a valid email address</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Service You're Interested In *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="hardwood-installation">Hardwood Installation</option>
+                            <option value="sanding-refinishing">Sanding & Refinishing</option>
+                            <option value="repair">Repair</option>
+                            <option value="vinyl">Vinyl</option>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="bathroom">Bathroom</option>
+                            <option value="stairs">Stairs</option>
+                            <option value="not-sure">Not Sure</option>
+                        </select>
+                        <span class="form-error">Please select a service</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project">Tell Us About Your Project *</label>
+                        <textarea id="project" name="project" placeholder="What's the space? What's happening with it now? What are you hoping to achieve?" required></textarea>
+                        <span class="form-error">Please describe your project</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeline">When are you looking to start your project?</label>
+                        <select id="timeline" name="timeline">
+                            <option value="">Select timeline</option>
+                            <option value="ready-now">Ready to Start Now</option>
+                            <option value="30-days">Within the Next 30 Days</option>
+                            <option value="more-than-month">More than a Month from Now</option>
+                            <option value="planning">Just Planning</option>
+                            <option value="exploring">Exploring</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Project Location *</label>
+                        <input type="text" id="location" name="location" placeholder="City / ZIP code / state" required>
+                        <span class="form-error">Please enter the project location</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="referral">How Did You Hear About Us?</label>
+                        <select id="referral" name="referral">
+                            <option value="">Select an option</option>
+                            <option value="thumbtack">Thumbtack</option>
+                            <option value="referral">Referral</option>
+                            <option value="google">Google</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="yelp">Yelp</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Anything else we should know about your project?</label>
+                        <textarea id="notes" name="notes" placeholder="Share any details that would help us understand the project better."></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Request Free In-Home Estimate</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Steps Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">What Happens Next</h2>
+            <p class="section-subtitle">Our simple process to get your project started</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>We Contact You</h3>
+                    <p>We'll reach out within 24 hours to discuss your project details</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Site Visit</h3>
+                    <p>We schedule a convenient time to visit your property and assess the project</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Estimate</h3>
+                    <p>Receive a detailed, transparent estimate with no hidden costs</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Start Project</h3>
+                    <p>Once you approve, we schedule and begin your project on time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div id="footer"></div>
+    
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/19737032816" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        💬
+    </a>
+    
+    <script src="js/load-components.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

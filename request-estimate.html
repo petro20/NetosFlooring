@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request an Estimate - C & A Home Improvement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="estimate-wizard-body">
+    <div id="header"></div>
+
+    <main class="estimate-wizard-page">
+        <form id="contactForm" class="wizard-form" data-wizard-form novalidate>
+            <div class="wizard-progress" aria-label="Estimate progress">
+                <div class="wizard-progress-line"></div>
+                <button type="button" class="wizard-step-dot active" data-step-dot="0" aria-label="Step 1">1</button>
+                <button type="button" class="wizard-step-dot" data-step-dot="1" aria-label="Step 2">2</button>
+                <button type="button" class="wizard-step-dot" data-step-dot="2" aria-label="Step 3">3</button>
+                <button type="button" class="wizard-step-dot" data-step-dot="3" aria-label="Step 4">4</button>
+                <button type="button" class="wizard-step-dot" data-step-dot="4" aria-label="Step 5">5</button>
+            </div>
+
+            <section class="wizard-step active" data-step="0">
+                <h1>How should we contact you?</h1>
+                <div class="wizard-grid two">
+                    <div class="form-group">
+                        <label for="firstName">First name</label>
+                        <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                        <span class="form-error">Please enter your first name</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+                        <span class="form-error">Please enter your last name</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                    <span class="form-error">Please enter a valid email address</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+                    <span class="form-error">Please enter your phone number</span>
+                </div>
+            </section>
+
+            <section class="wizard-step" data-step="1">
+                <h1>What best describes your flooring project?</h1>
+                <div class="wizard-card-grid">
+                    <label class="wizard-image-card image-install">
+                        <input type="radio" name="service" value="new-installation" required checked>
+                        <span class="choice-check"></span>
+                        <strong>New<br>installation</strong>
+                    </label>
+
+                    <label class="wizard-image-card image-refinish">
+                        <input type="radio" name="service" value="sand-refinish">
+                        <span class="choice-check"></span>
+                        <strong>Sand<br>&amp; Refinish</strong>
+                    </label>
+
+                    <label class="wizard-image-card image-repair">
+                        <input type="radio" name="service" value="hardwood-repair">
+                        <span class="choice-check"></span>
+                        <strong>Hardwood<br>Repair</strong>
+                    </label>
+                </div>
+                <span class="wizard-choice-error" data-choice-error>Please choose a project type</span>
+            </section>
+
+            <section class="wizard-step" data-step="2">
+                <h1>When are you looking to start your project?</h1>
+                <div class="wizard-option-list">
+                    <label class="wizard-option-row">
+                        <input type="radio" name="timeline" value="ready-now" required>
+                        <span class="option-dot"></span>
+                        <strong>Ready to Start Now</strong>
+                    </label>
+
+                    <label class="wizard-option-row">
+                        <input type="radio" name="timeline" value="30-days">
+                        <span class="option-dot"></span>
+                        <strong>Within the Next 30 Days</strong>
+                    </label>
+
+                    <label class="wizard-option-row">
+                        <input type="radio" name="timeline" value="more-than-month">
+                        <span class="option-dot"></span>
+                        <strong>More than a Month from Now</strong>
+                    </label>
+
+                    <label class="wizard-option-row">
+                        <input type="radio" name="timeline" value="planning-exploring">
+                        <span class="option-dot"></span>
+                        <strong>Just Planning / Exploring</strong>
+                    </label>
+                </div>
+                <span class="wizard-choice-error" data-choice-error>Please choose a timeline</span>
+            </section>
+
+            <section class="wizard-step" data-step="3">
+                <h1>Where is your project located?</h1>
+                <div class="wizard-grid two">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Montclair" required>
+                        <span class="form-error">Please enter the city</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zipcode">Zipcode</label>
+                        <input type="text" id="zipcode" name="zipcode" placeholder="Postal Code" required>
+                        <span class="form-error">Please enter the zipcode</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" placeholder="e.g. New Jersey" required>
+                    <span class="form-error">Please enter the state</span>
+                </div>
+            </section>
+
+            <section class="wizard-step" data-step="4">
+                <div class="wizard-final-panel" data-final-panel="description">
+                    <h1>Anything else we should know about your project?</h1>
+                    <div class="form-group">
+                        <label for="project">Project Description</label>
+                        <textarea id="project" name="project" placeholder="Tell us everything that we should know when contacting you." required></textarea>
+                        <span class="form-error">Please describe your project</span>
+                    </div>
+                </div>
+
+                <div class="wizard-final-panel final-panel-hidden" data-final-panel="consent">
+                    <h1>Privacy policy, terms &amp; consent</h1>
+                    <p class="wizard-consent-copy">I Consent to Receive SMS Notifications, Alerts &amp; Occasional Marketing Communication from C &amp; A Home Improvement. Message frequency varies. Message &amp; data rates may apply. Text HELP to (973) 703-2816 for assistance. You can reply STOP to unsubscribe at any time.</p>
+
+                    <label class="wizard-privacy-consent">
+                        <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                        <span class="privacy-check" aria-hidden="true"></span>
+                        <strong>Yes, I have read the privacy policy and accept it</strong>
+                    </label>
+                    <span class="wizard-choice-error" data-choice-error>Please accept the privacy policy to continue</span>
+                </div>
+            </section>
+
+            <div class="wizard-actions">
+                <button type="button" class="wizard-btn wizard-btn-back" data-wizard-back aria-label="Go back">
+                    <span aria-hidden="true">&larr;</span>
+                </button>
+                <button type="button" class="wizard-btn wizard-btn-next" data-wizard-next>Next</button>
+                <button type="submit" class="wizard-btn wizard-btn-submit" data-wizard-submit>Send Request</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="js/load-components.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

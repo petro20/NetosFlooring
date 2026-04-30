@@ -1,0 +1,336 @@
+// Main JavaScript for C & A Home Improvement
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize hamburger menu toggle
+    initHamburger();
+    
+    // Initialize form validation
+    initFormValidation();
+
+    // Initialize estimate wizard
+    initEstimateWizard();
+    
+    // Initialize lazy loading for images
+    initLazyLoading();
+});
+
+// Hamburger Menu Toggle
+function initHamburger() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileNav.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+    }
+}
+
+// Form Validation
+function initFormValidation() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        if (contactForm.dataset.wizardForm !== undefined) {
+            return;
+        }
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            const requiredFields = contactForm.querySelectorAll('[required]');
+            
+            // Clear previous errors
+            contactForm.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            
+            // Validate each required field
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.closest('.form-group').classList.add('error');
+                }
+                
+                // Email validation
+                if (field.type === 'email' && field.value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value)) {
+                        isValid = false;
+                        field.closest('.form-group').classList.add('error');
+                    }
+                }
+                
+                // Phone validation
+                if (field.type === 'tel' && field.value) {
+                    const phoneRegex = /^[\d\s\-\(\)\+]+$/;
+                    if (!phoneRegex.test(field.value) || field.value.replace(/\D/g, '').length < 10) {
+                        isValid = false;
+                        field.closest('.form-group').classList.add('error');
+                    }
+                }
+            });
+            
+            if (isValid) {
+                // Show success message (in production, this would send to a server)
+                alert('Thank you for your request! We will contact you within 24 hours.');
+                contactForm.reset();
+            }
+        });
+        
+        // Remove error class on input
+        const formGroups = contactForm.querySelectorAll('.form-group');
+        formGroups.forEach(group => {
+            const input = group.querySelector('input, select, textarea');
+            if (input) {
+                input.addEventListener('input', function() {
+                    group.classList.remove('error');
+                });
+            }
+        });
+    }
+}
+
+function initEstimateWizard() {
+    const wizard = document.querySelector('[data-wizard-form]');
+
+    if (!wizard) {
+        return;
+    }
+
+    const steps = Array.from(wizard.querySelectorAll('[data-step]'));
+    const dots = Array.from(wizard.querySelectorAll('[data-step-dot]'));
+    const backButton = wizard.querySelector('[data-wizard-back]');
+    const nextButton = wizard.querySelector('[data-wizard-next]');
+    const submitButton = wizard.querySelector('[data-wizard-submit]');
+    let currentStep = 0;
+    let finalPanel = 'description';
+
+    function setFinalPanel(panel) {
+        finalPanel = panel;
+
+        wizard.querySelectorAll('[data-final-panel]').forEach(element => {
+            element.classList.toggle('final-panel-hidden', element.dataset.finalPanel !== panel);
+        });
+    }
+
+    function showStep(index) {
+        currentStep = Math.max(0, Math.min(index, steps.length - 1));
+
+        if (currentStep !== steps.length - 1) {
+            setFinalPanel('description');
+        }
+
+        steps.forEach((step, stepIndex) => {
+            step.classList.toggle('active', stepIndex === currentStep);
+        });
+
+        dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle('active', dotIndex === currentStep);
+            dot.classList.toggle('complete', dotIndex < currentStep);
+        });
+
+        backButton.disabled = currentStep === 0;
+        nextButton.style.display = currentStep === steps.length - 1 && finalPanel === 'consent' ? 'none' : 'inline-flex';
+        submitButton.style.display = currentStep === steps.length - 1 && finalPanel === 'consent' ? 'inline-flex' : 'none';
+    }
+
+    function validateStep(step) {
+        let isValid = true;
+        const fields = Array.from(step.querySelectorAll('[required]')).filter(field => !field.closest('.final-panel-hidden'));
+        const choiceError = step.querySelector('[data-choice-error]');
+
+        step.querySelectorAll('.form-group').forEach(group => {
+            group.classList.remove('error');
+        });
+
+        if (choiceError) {
+            choiceError.classList.remove('active');
+        }
+
+        fields.forEach(field => {
+            if (field.type === 'radio') {
+                const checked = wizard.querySelector(`input[name="${field.name}"]:checked`);
+                if (!checked) {
+                    isValid = false;
+                    if (choiceError) {
+                        choiceError.classList.add('active');
+                    }
+                }
+                return;
+            }
+
+            if (field.type === 'checkbox') {
+                if (!field.checked) {
+                    isValid = false;
+                    if (choiceError) {
+                        choiceError.classList.add('active');
+                    }
+                }
+                return;
+            }
+
+            if (!field.value.trim()) {
+                isValid = false;
+                const group = field.closest('.form-group');
+                if (group) {
+                    group.classList.add('error');
+                }
+            }
+
+            if (field.type === 'email' && field.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    isValid = false;
+                    const group = field.closest('.form-group');
+                    if (group) {
+                        group.classList.add('error');
+                    }
+                }
+            }
+
+            if (field.type === 'tel' && field.value) {
+                const phoneRegex = /^[\d\s\-\(\)\+]+$/;
+                if (!phoneRegex.test(field.value) || field.value.replace(/\D/g, '').length < 10) {
+                    isValid = false;
+                    const group = field.closest('.form-group');
+                    if (group) {
+                        group.classList.add('error');
+                    }
+                }
+            }
+        });
+
+        return isValid;
+    }
+
+    nextButton.addEventListener('click', function() {
+        if (validateStep(steps[currentStep])) {
+            if (currentStep === steps.length - 1 && finalPanel === 'description') {
+                setFinalPanel('consent');
+                showStep(currentStep);
+                return;
+            }
+
+            showStep(currentStep + 1);
+        }
+    });
+
+    backButton.addEventListener('click', function() {
+        if (currentStep === steps.length - 1 && finalPanel === 'consent') {
+            setFinalPanel('description');
+            showStep(currentStep);
+            return;
+        }
+
+        showStep(currentStep - 1);
+    });
+
+    dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', function() {
+            if (dotIndex <= currentStep || validateStep(steps[currentStep])) {
+                showStep(dotIndex);
+            }
+        });
+    });
+
+    wizard.querySelectorAll('input, select, textarea').forEach(field => {
+        field.addEventListener('input', function() {
+            const group = field.closest('.form-group');
+            if (group) {
+                group.classList.remove('error');
+            }
+        });
+    });
+
+    wizard.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const allValid = validateStep(steps[currentStep]);
+
+        if (allValid) {
+            window.location.href = 'thank-you.html';
+        }
+    });
+
+    showStep(0);
+}
+
+// Lazy Loading for Images
+function initLazyLoading() {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+        });
+    }
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add fade-in animation on scroll
+function addFadeInOnScroll() {
+    const fadeElements = document.querySelectorAll('.service-card, .gallery-item, .testimonial-card, .feature-card');
+    
+    if ('IntersectionObserver' in window) {
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            fadeObserver.observe(el);
+        });
+    }
+}
+
+// Initialize fade-in animations
+addFadeInOnScroll();
