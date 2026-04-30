@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize estimate wizard
     initEstimateWizard();
+
+    // Initialize Thumbtack service area map
+    initThumbtackServiceMap();
     
     // Initialize lazy loading for images
     initLazyLoading();
@@ -267,6 +270,60 @@ function initEstimateWizard() {
     showStep(0);
 }
 
+function initThumbtackServiceMap() {
+    const mapElement = document.getElementById('thumbtackServiceMap');
+
+    if (!mapElement) {
+        return;
+    }
+
+    if (typeof L === 'undefined') {
+        mapElement.innerHTML = '<iframe class="satellite-map-frame" src="https://maps.google.com/maps?q=Elizabeth%2C%20New%20Jersey&t=k&z=10&output=embed" title="Satellite map of C & A Home Improvement service area around Elizabeth, New Jersey" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+        return;
+    }
+
+    const thumbtackLocations = [
+        {
+            name: 'Elizabeth, NJ',
+            coordinates: [40.66399, -74.2107],
+            label: 'Public Thumbtack service location',
+            details: 'Listed on Thumbtack as serving Elizabeth, NJ'
+        }
+    ];
+
+    const map = L.map(mapElement, {
+        center: [40.68, -74.23],
+        zoom: 10,
+        scrollWheelZoom: false,
+        zoomControl: true
+    });
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri'
+    }).addTo(map);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Labels &copy; Esri'
+    }).addTo(map);
+
+    const thumbtackIcon = L.divIcon({
+        className: 'thumbtack-map-marker',
+        html: '<span></span>',
+        iconSize: [34, 42],
+        iconAnchor: [17, 38],
+        popupAnchor: [0, -34]
+    });
+
+    thumbtackLocations.forEach(location => {
+        L.marker(location.coordinates, { icon: thumbtackIcon })
+            .addTo(map)
+            .bindPopup(`<strong>${location.name}</strong><br>${location.label}<br><span>${location.details}</span>`);
+    });
+
+    const bounds = L.latLngBounds(thumbtackLocations.map(location => location.coordinates));
+    map.fitBounds(bounds.pad(0.35), { maxZoom: 11 });
+}
+
 // Lazy Loading for Images
 function initLazyLoading() {
     const lazyImages = document.querySelectorAll('img[data-src]');
@@ -317,6 +374,8 @@ function addFadeInOnScroll() {
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                     entry.target.classList.add('fade-in');
                     fadeObserver.unobserve(entry.target);
                 }

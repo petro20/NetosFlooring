@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="icon" type="image/jpeg" href="images/netos-flooring-logo.jpeg">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -146,17 +149,42 @@
             <h2 class="section-title">Areas We Serve</h2>
             <p class="section-subtitle">C & A Home Improvement proudly handles flooring and renovation projects across New Jersey.</p>
             
-            <div class="map-container">
-                <div class="map-placeholder">
-                    <div>
-                        <p style="font-size: 1.2rem; margin-bottom: 10px;">New Jersey</p>
-                        <p>Hardwood, vinyl, stairs, kitchens, bathrooms, and full renovations</p>
+            <div class="map-container service-area-map">
+                <div class="service-area-map-visual" aria-label="Map showing completed Thumbtack project areas across New Jersey">
+                    <div id="thumbtackServiceMap" class="thumbtack-leaflet-map" aria-label="Satellite map with public Thumbtack service locations"></div>
+                    <noscript>
+                        <a class="map-fallback-link" href="https://maps.google.com/maps?q=Elizabeth%2C%20New%20Jersey&t=k&z=10" target="_blank" rel="noopener">Open satellite map of Elizabeth, New Jersey</a>
+                    </noscript>
+                </div>
+
+                <div class="service-area-map-panel">
+                    <span class="map-kicker">Thumbtack project footprint</span>
+                    <h3>206 hires and counting</h3>
+                    <p>Thumbtack publicly lists C & A Home Improvement Corp as serving Elizabeth, NJ. Customer reviews show completed flooring, stair, bathroom, repair, and renovation work, but do not expose private job addresses.</p>
+                    <div class="map-stats">
+                        <div>
+                            <strong>4.7</strong>
+                            <span>Thumbtack rating</span>
+                        </div>
+                        <div>
+                            <strong>258</strong>
+                            <span>reviews</span>
+                        </div>
                     </div>
+                    <ul class="map-service-list">
+                        <li>Public Thumbtack location: Elizabeth, NJ</li>
+                        <li>NJ HIC License #13VH03365900</li>
+                        <li>Hardwood refinishing</li>
+                        <li>Vinyl and laminate installation</li>
+                        <li>Floor repair and stairs</li>
+                        <li>Kitchen and bathroom updates</li>
+                    </ul>
+                    <a href="https://www.thumbtack.com/nj/elizabeth/hardwood-floor-installation/c-home-improvement-corp/service/235435898609173708" class="service-area-link" target="_blank" rel="noopener">View Thumbtack profile</a>
                 </div>
             </div>
             
             <div class="text-center mt-40">
-                <p style="color: var(--text-light);">Don't see your area? Contact us to discuss your project. We may be able to help.</p>
+                <p class="service-area-note">Don't see your area? Contact us to discuss your project. We may be able to help.</p>
             </div>
         </div>
     </section>
@@ -173,11 +201,13 @@
     <div id="footer"></div>
     
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/19737032816" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-        💬
+    <a href="https://wa.me/19737032816" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.6 11.6 0 0 0 2.3 17.4L1 22l4.7-1.2A11.6 11.6 0 0 0 12 22 11.6 11.6 0 0 0 20.5 3.5zM12 20a9.5 9.5 0 0 1-4.9-1.3l-.4-.2-2.8.7.7-2.7-.2-.4A9.6 9.6 0 1 1 12 20zm5.2-7.1c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L9.1 5.8c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/></svg>
+        <span>WhatsApp</span>
     </a>
     
     <script src="js/load-components.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
