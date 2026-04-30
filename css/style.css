@@ -2359,29 +2359,33 @@ header {
 
 .contact-section {
     background:
-        linear-gradient(90deg, rgba(184, 102, 45, 0.04) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(24, 22, 20, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 15% 8%, rgba(242, 138, 46, 0.12), transparent 30%),
+        linear-gradient(90deg, rgba(184, 102, 45, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(24, 22, 20, 0.03) 1px, transparent 1px),
         var(--ivory);
     background-size: 42px 42px;
 }
 
 .contact-layout {
     display: grid;
-    gap: 38px;
+    gap: clamp(34px, 6vw, 76px);
     align-items: start;
-    max-width: 1120px;
+    max-width: 1160px;
     margin: 0 auto;
 }
 
 .contact-intro {
     max-width: 560px;
+    position: sticky;
+    top: 110px;
 }
 
 .contact-intro h2 {
     color: var(--text-dark);
-    font-size: clamp(2.1rem, 5vw, 3.7rem);
+    font-size: clamp(2.45rem, 5.4vw, 4.35rem);
     line-height: 1.04;
     margin-bottom: 22px;
+    max-width: 10ch;
 }
 
 .contact-intro p {
@@ -2391,19 +2395,67 @@ header {
     margin-bottom: 18px;
 }
 
+.contact-proof {
+    display: grid;
+    gap: 12px;
+    margin-top: 34px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(24, 22, 20, 0.1);
+}
+
+.contact-proof div {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 14px;
+}
+
+.contact-proof strong {
+    color: var(--primary-orange);
+    font-size: 1.08rem;
+    line-height: 1;
+}
+
+.contact-proof span {
+    color: var(--text-dark);
+    font-size: 0.96rem;
+    font-weight: 700;
+}
+
+.contact-section .form-container {
+    max-width: 640px;
+    width: 100%;
+    margin: 0;
+    padding: clamp(24px, 4vw, 40px);
+    border: 1px solid rgba(184, 102, 45, 0.24);
+    border-radius: 8px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 242, 0.96)),
+        var(--white);
+    box-shadow:
+        0 26px 70px rgba(24, 22, 20, 0.11),
+        0 1px 0 rgba(255, 255, 255, 0.88) inset;
+}
+
 .form-heading {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(24, 22, 20, 0.08);
 }
 
 .form-heading h2 {
     color: var(--text-dark);
-    font-size: clamp(1.7rem, 3vw, 2.35rem);
-    line-height: 1.12;
-    margin-bottom: 10px;
+    font-size: clamp(1.85rem, 3vw, 2.55rem);
+    line-height: 1.06;
+    margin-bottom: 12px;
+    max-width: 13ch;
 }
 
 .form-heading p {
     color: var(--text-light);
+    font-size: 0.96rem;
+    line-height: 1.6;
+    max-width: 52ch;
 }
 
 .form-alert {
@@ -2429,7 +2481,63 @@ header {
 }
 
 .form-container .form-row {
-    gap: 18px;
+    gap: 16px;
+}
+
+.contact-section .form-group {
+    margin-bottom: 18px;
+}
+
+.contact-section .form-group label {
+    color: var(--text-dark);
+    font-size: 0.83rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    margin-bottom: 7px;
+}
+
+.contact-section .form-group input,
+.contact-section .form-group select,
+.contact-section .form-group textarea {
+    min-height: 48px;
+    padding: 13px 14px;
+    border: 1px solid rgba(184, 102, 45, 0.34);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.92);
+    color: var(--text-dark);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.contact-section .form-group input::placeholder,
+.contact-section .form-group textarea::placeholder {
+    color: rgba(75, 65, 57, 0.58);
+}
+
+.contact-section .form-group input:hover,
+.contact-section .form-group select:hover,
+.contact-section .form-group textarea:hover {
+    border-color: rgba(184, 102, 45, 0.58);
+}
+
+.contact-section .form-group input:focus,
+.contact-section .form-group select:focus,
+.contact-section .form-group textarea:focus {
+    border-color: var(--primary-orange);
+    background-color: var(--white);
+    box-shadow:
+        0 0 0 4px rgba(242, 138, 46, 0.13),
+        0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.contact-section .form-group textarea {
+    min-height: 126px;
+}
+
+.contact-section .form-submit {
+    margin-top: 4px;
+    min-height: 56px;
+    border-radius: 5px;
+    font-size: 0.98rem;
 }
 
 .estimate-hero {
@@ -3149,6 +3257,23 @@ footer {
     .trust-line {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    .contact-intro {
+        position: static;
+    }
+
+    .contact-intro h2,
+    .form-heading h2 {
+        max-width: none;
+    }
+
+    .contact-proof {
+        margin-top: 26px;
+    }
+
+    .contact-section .form-container {
+        padding: 24px;
     }
 
     .whatsapp-float {
