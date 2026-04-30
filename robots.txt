@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paleturquoise-dog-270952.hostingersite.com/sitemap.xml
